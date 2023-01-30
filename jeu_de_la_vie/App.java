@@ -11,7 +11,7 @@ public class App
         int nbLig = sc.nextInt();
         System.out.println("Veuillez saisir un facteur d'apparition (on conseille 6, si vous saisissez 6 il y aura une chance sur six qu'une cellule apparaisse.) : ");
         int facteur = sc.nextInt();
-        System.out.println("Veuillez saisir un temps de rafraichissement en ms (on conseille 1000, vous pouvez l'accélerer en maintenant la touche 'c' de votre clavier) : ");
+        System.out.println("Veuillez saisir un temps de rafraichissement en ms (on conseille 800, vous pouvez l'accélerer en maintenant la touche 'c' de votre clavier) : ");
         long tempsPause = sc.nextLong();
 
         JFrame fenetre = new JFrame();
