@@ -5,7 +5,10 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Grille extends JPanel 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Grille extends JPanel implements KeyListener
 {
     // ATTRIBUTS
     boolean[][] grille;
@@ -14,21 +17,21 @@ public class Grille extends JPanel
     int cote; 
     double largeurFenetre;
     double hauteurFenetre;
+    long tempsPause;
 
     // CONSTRUCTEURS
-    public Grille(int nbLig)
+    public Grille(int nbLig, long tempsPause)
     {
+        // Pour le keyListener
+        this.setFocusable(true);
+        this.addKeyListener(this);
+
+        this.tempsPause = tempsPause;
         this.nbLig = nbLig;
         hauteurFenetre = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         largeurFenetre = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         cote = (int)(hauteurFenetre / nbLig);
         nbCol = (int) largeurFenetre / cote;
-
-        System.out.println("nbCol : "+nbCol);
-        System.out.println("largeurFenetre : "+largeurFenetre);
-        System.out.println("hauteurFenetre : "+hauteurFenetre);
-        System.out.println("cote : "+cote);
-        System.out.println("nbLig : "+nbLig);
 
         grille = new boolean[nbLig][nbCol];
 
@@ -181,5 +184,41 @@ public class Grille extends JPanel
         {
             g.drawLine(j * cote,0 , j * cote, nbLig * cote);
         }
+    }
+
+    public void tourne()
+    {
+        while(true)
+        {
+            pause(tempsPause);
+            mettreAJour();
+        }
+    }
+
+    // LISTENER
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) 
+    {
+        if (e.getKeyChar() == 'c')
+        {
+            tempsPause = 10;
+        }
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        if (e.getKeyChar() == 'c')
+            {
+                tempsPause = 1000;
+            }
     }
 }
