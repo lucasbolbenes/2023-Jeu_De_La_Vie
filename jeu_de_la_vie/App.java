@@ -10,8 +10,7 @@ public class App
         int facteur;
         long tempsPause;
 
-        /*
-        System.out.println("Le jeu de la vie de John Conway, version implémentée par Lucas Bolbènes.\nCommandes :\n\t- vous pouvez mettre le jeu en pause en appuyant sur la touche 'p' de votre clavier\n\t- vous pouvez accélerer le déroulement en maintenant la touche 'c' de votre clavier\n\t- vous pouvez créer la configuration que vous souhaitez en cliquant sur les cases de la grille\nSouhaitez vous utiliser les paramètres par défaut ? (y/n)");
+        System.out.println("Le jeu de la vie de John Conway, version implementee par Lucas Bolbenes.\nCommandes :\n\t- vous pouvez mettre le jeu en pause en appuyant sur la touche 'p' de votre clavier\n\t- vous pouvez accelerer le deroulement en maintenant la touche 'c' de votre clavier\n\t- vous pouvez creer la configuration que vous souhaitez en cliquant sur les cases de la grille\nSouhaitez vous utiliser les parametres par defaut ? (y/n)");
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
         if(reponse.charAt(0) == 'n')
@@ -25,11 +24,11 @@ public class App
         }
         else
         {
-            */
+            
             nbLig = 40;
             facteur = 6;
             tempsPause = 1000;
-        //}
+        }
 
 
         JFrame fenetre = new JFrame();
@@ -42,18 +41,6 @@ public class App
         Grille grille = new Grille(nbLig, tempsPause);
 
         fenetre.add(grille);
-
-        /*
-        grille.grille[5][1] = true;
-        grille.grille[5][4] = true;
-        grille.grille[6][5] = true;
-        grille.grille[7][1] = true;
-        grille.grille[7][5] = true;
-        grille.grille[8][2] = true;
-        grille.grille[8][3] = true;
-        grille.grille[8][4] = true;
-        grille.grille[8][5] = true;
-        */
 
         grille.generationAleatoire(facteur);
 

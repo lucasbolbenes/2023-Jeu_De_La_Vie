@@ -176,7 +176,7 @@ public class Grille extends JPanel implements KeyListener, MouseListener
             }
         }
 
-        // Dessin de la bordure
+        // Dessin de la grille
         g.setColor(Color.black);
 
         for (int i = 0; i <= nbLig; i++) 
