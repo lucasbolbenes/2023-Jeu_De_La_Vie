@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-public class Grille extends JPanel implements KeyListener
+public class Grille extends JPanel implements KeyListener, MouseListener
 {
     // ATTRIBUTS
     boolean[][] grille;
@@ -18,6 +20,7 @@ public class Grille extends JPanel implements KeyListener
     double largeurFenetre;
     double hauteurFenetre;
     long tempsPause;
+    boolean pause;
 
     // CONSTRUCTEURS
     public Grille(int nbLig, long tempsPause)
@@ -25,6 +28,7 @@ public class Grille extends JPanel implements KeyListener
         // Pour le keyListener
         this.setFocusable(true);
         this.addKeyListener(this);
+        this.addMouseListener(this);
 
         this.tempsPause = tempsPause;
         this.nbLig = nbLig;
@@ -33,8 +37,9 @@ public class Grille extends JPanel implements KeyListener
         cote = (int)(hauteurFenetre / nbLig);
         nbCol = (int) largeurFenetre / cote;
 
-        grille = new boolean[nbLig][nbCol];
+        pause = false;
 
+        grille = new boolean[nbLig][nbCol];
 
         for(int i = 0; i < nbLig; i++) 
         {
@@ -153,7 +158,6 @@ public class Grille extends JPanel implements KeyListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-
         // Dessin des carrés
         for(int i = 0; i < nbLig; i++) 
         {
@@ -190,17 +194,34 @@ public class Grille extends JPanel implements KeyListener
     {
         while(true)
         {
-            pause(tempsPause);
-            mettreAJour();
+            if(!pause)
+            {
+                mettreAJour();
+                pause(tempsPause);
+            }
+            else
+            {
+                pause(0);
+            }
         }
     }
 
     // LISTENER
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+    public void keyTyped(KeyEvent e) 
+    {
+        if (e.getKeyChar() == 'p')
+        {
+            if(pause)
+            {
+                pause = false;
+            }
+            else
+            {
+                pause = true;
+            }
+        } 
     }
 
     @Override
@@ -209,8 +230,7 @@ public class Grille extends JPanel implements KeyListener
         if (e.getKeyChar() == 'c')
         {
             tempsPause = 10;
-        }
-        
+        }           
     }
 
     @Override
@@ -221,4 +241,35 @@ public class Grille extends JPanel implements KeyListener
                 tempsPause = 1000;
             }
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) 
+    {
+        int i = (int)(e.getX()/cote);
+        int j =  (int)(e.getY()/cote);
+        if(grille[j][i])
+        {
+            grille[j][i] = false;
+            repaint();
+        } 
+        else
+        {
+            grille[j][i] = true;
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    
 }
