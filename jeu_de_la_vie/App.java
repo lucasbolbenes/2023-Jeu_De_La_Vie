@@ -1,15 +1,24 @@
 import java.util.Scanner;
-
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 public class App
 {
     public static void main(String[] args) 
     {
+        // Paramètres du jeu
         int nbLig;
         int facteur;
         long tempsPause;
 
+        // Interaction avec l'utilisateur, récupération des paramètres
         System.out.println("Le jeu de la vie de John Conway, version implementee par Lucas Bolbenes.\nCommandes :\n\t- vous pouvez mettre le jeu en pause en appuyant sur la touche 'p' de votre clavier\n\t- vous pouvez accelerer le deroulement en maintenant la touche 'c' de votre clavier\n\t- vous pouvez creer la configuration que vous souhaitez en cliquant sur les cases de la grille\nSouhaitez vous utiliser les parametres par defaut ? (y/n)");
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
@@ -24,26 +33,26 @@ public class App
         }
         else
         {
-            
             nbLig = 40;
             facteur = 6;
             tempsPause = 1000;
         }
 
-
+        // Création et paramétrage de la fenêtre graphique
         JFrame fenetre = new JFrame();
-        
         fenetre.setTitle("Jeu de la vie");
         fenetre.setSize(fenetre.getToolkit().getScreenSize());
         fenetre.setVisible(true);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Création et ajout de l'objet Grille
         Grille grille = new Grille(nbLig, tempsPause);
-
         fenetre.add(grille);
 
+        // Génération aléatoire des cellules
         grille.generationAleatoire(facteur);
 
+        // Activation du défilement des générations
         grille.tourne();
     }
 }
