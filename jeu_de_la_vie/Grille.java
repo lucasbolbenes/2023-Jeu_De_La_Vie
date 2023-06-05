@@ -36,9 +36,10 @@ public class Grille extends JPanel implements KeyListener, MouseListener
     public Grille(int nbLig, long tempsPause)
     {
         // Paramétrages pour utiliser les Listeners
-        this.setFocusable(true);
-        this.addKeyListener(this);
-        this.addMouseListener(this);
+        setFocusable(true);
+        requestFocusInWindow();
+        addKeyListener(this);
+        addMouseListener(this);
 
         // Initialisation des attributs
         this.tempsPause = tempsPause;
@@ -133,6 +134,7 @@ public class Grille extends JPanel implements KeyListener, MouseListener
         repaint();
     }
 
+    /* 
     // Utilitaire
     private void afficherGrille(boolean[][] grille)
     {
@@ -145,6 +147,7 @@ public class Grille extends JPanel implements KeyListener, MouseListener
             System.out.println("");
         }
     }
+    */
 
     private boolean[][] copierGrille (boolean[][] grille)
     {
@@ -248,6 +251,7 @@ public class Grille extends JPanel implements KeyListener, MouseListener
     }
 
     @Override
+    
     public void keyPressed(KeyEvent e) 
     {
         if (e.getKeyChar() == 'c')

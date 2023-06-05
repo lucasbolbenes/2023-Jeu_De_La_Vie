@@ -1,13 +1,5 @@
 import java.util.Scanner;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 public class App
 {
@@ -38,21 +30,27 @@ public class App
             tempsPause = 1000;
         }
 
+        sc.close();
+
         // Création et paramétrage de la fenêtre graphique
         JFrame fenetre = new JFrame();
         fenetre.setTitle("Jeu de la vie");
         fenetre.setSize(fenetre.getToolkit().getScreenSize());
-        fenetre.setVisible(true);
+        
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Création et ajout de l'objet Grille
         Grille grille = new Grille(nbLig, tempsPause);
         fenetre.add(grille);
 
+        fenetre.setVisible(true);
+
         // Génération aléatoire des cellules
         grille.generationAleatoire(facteur);
 
         // Activation du défilement des générations
         grille.tourne();
+
+        
     }
 }
